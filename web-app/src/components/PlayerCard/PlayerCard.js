@@ -16,13 +16,49 @@ import Button, { ButtonGroup } from 'calcite-react/Button';
 class PlayerCard extends Component {
   constructor(props) {
     super(props);
+    const { name, plays, backhand, wins, losses, feet, inches } = props;
     this.state = {
+      name, 
+      plays, 
+      backhand, 
+      wins, 
+      losses, 
+      feet, 
+      inches,
       mode: "readOnly",
-    };
+    }
+  }
+
+  updateName = (event) => {
+    this.setState({name: event.target.value})
+  }
+
+  updateFeetSliderValue = (event) => {
+    this.setState({ feet: parseInt(event.target.value, 10) })
+  }
+
+  updateInchesSliderValue = (event) => {
+    this.setState({ inches: parseInt(event.target.value, 10) })
+  }
+
+  handlePlaysSelectChange = (value) => {
+    this.setState({ plays: value})
+  }
+
+  handleBackhandSelectChange = (value) => {
+    this.setState({ backhand: value})
+  }
+
+  handleWinsSelectChange = (event) => {
+    this.setState({ wins: event.target.value})
+  }
+
+  handleLossesSelectChange = (event) => {
+    this.setState({ losses: event.target.value})
   }
 
   getReadOnlyCard() {
-    const { name, plays, backhand, wins, losses, feet, inches } = this.props;
+    const { name, plays, backhand, wins, losses, feet, inches } = this.state;
     var height;
     if (feet === null || height === "") {
       height = "N/A";
@@ -56,10 +92,11 @@ class PlayerCard extends Component {
     }
 
     return (
-      <Card bar="blue" style={{ margin: "0 710px", flex: "1 1 20%" }}>
+      <Card bar="blue" style={{ margin: "0 480px", flex: "1 1 20%" }}>
         <CardContent>
           <CardTitle>{name}</CardTitle>
           <Button onClick={() => this.setState({mode: "editable"})}>Edit</Button>
+          {/* <Button onClick={this.openModal}>Edit</Button> */}
           <p>
             <li>height: {height}</li>
             <li>plays: {plays}</li>
@@ -76,43 +113,59 @@ class PlayerCard extends Component {
   getEditableCard() {
     //TODO editable card ;-)
     return (
-        <div>
-        <TextField id="name" defaultValue={this.props.name} />
+      <div style={{display: "flex", flexDirection:"column"}}>
+      {/* name */}
+      <TextField id="name" value={this.state.name} onChange={this.updateName}/>
 
-        {/* height (feet)  */}
-        <Slider
-            min={0}
-            max={8}
-        />
-        {/* height (inches) */}
-        <Slider
-            min={0}
-            max={12}
-        /> 
+      {/* height (feet)  */}
+      <Slider
+          min={0}
+          max={8}
+          value = {this.state.feet}
+          onChange={this.updateFeetSliderValue}
+      />
+      <div>{this.state.feet + "'"}</div>
 
-        <Select
-            onChange={this.handleSelectChange}
-            selectedValue={this.state.selectedValue}
-        >
-            <MenuItem>right-handed</MenuItem>
-            <MenuItem>left-handed</MenuItem>
-        </Select>
-        
-        <Select
-            onChange={this.handleSelectChange}
-            selectedValue={this.state.selectedValue}
-        >
-            <MenuItem>one-handed</MenuItem>
-            <MenuItem>two-handed</MenuItem>
-        </Select>
+      {/* height (inches) */}
+      <Slider
+          min={0}
+          max={11}
+          value = {this.state.inches}
+          onChange={this.updateInchesSliderValue}
+      /> 
+      <div>{this.state.inches + '"'}</div>
 
-        {/* wins */}
-        <TextField id="name" defaultValue={this.props.wins} />
-        {/* losses */}
-        <TextField id="name" defaultValue={this.props.losses} />
-        {/* button to switch state */}
-        <Button onClick={() => this.setState({mode: "readOnly"})}>Save</Button>
-        </div>
+      {/* plays (handedness) */}
+      <Select
+        onChange={this.handlePlaysSelectChange}
+        selectedValue={this.state.plays}
+      >
+        <MenuItem value="right-handed">Right-Handed</MenuItem>
+        <MenuItem value="left-handed">Left-Handed</MenuItem>
+      </Select>
+      
+      {/* backhand type */}
+      <Select
+          onChange={this.handleBackhandSelectChange}
+          selectedValue={this.state.backhand}
+      >
+          <MenuItem value="one-handed">One-Handed</MenuItem>
+          <MenuItem value="two-handed">Two-Handed</MenuItem>
+      </Select>
+
+      {/* wins */}
+      <TextField id="name" value={this.state.wins} onChange={this.handleWinsSelectChange} />
+
+      {/* losses */}
+      <TextField id="name" value={this.state.losses} onChange={this.handleLossesSelectChange} />
+
+      {/* button to switch state */}
+      <Button onClick={() => 
+        {
+          const { name, plays, backhand, wins, losses, feet, inches } = this.state;
+          this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, inches})
+          this.setState({mode: "readOnly"})}}>Save</Button>
+      </div>
     );
   }
 

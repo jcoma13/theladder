@@ -10,12 +10,13 @@ export default {
 
 export const myPlayerCard = () => {
   const name = text("Name", "Jansen Comadena");
-  const feet = number("Height(feet)", "6");
-  const inches = number("Height(inches)", "1");
+  const feet = number("Height(feet)", 6);
+  const inches = number("Height(inches)", 1);
   const plays = text("Plays", "right-handed");
   const backhand = text("Backhand", "two-handed");
   const wins = number("Wins", 15);
   const losses = number("Losses", 6);
+  const handlePlayerUpdated = function(args) {console.log(args)};
 
   return (
     <PlayerCard
@@ -27,7 +28,7 @@ export const myPlayerCard = () => {
       backhand={backhand}
       wins={wins}
       losses={losses}
-      onClick={action("clicked")}
+      onPlayerUpdated={handlePlayerUpdated}
     />
   );
 };
