@@ -3,15 +3,11 @@ import React, { Component } from "react";
 import TextField from 'calcite-react/TextField';
 import Select from 'calcite-react/Select';
 import Slider from 'calcite-react/Slider'
-import Form, {
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    Fieldset,
-    Legend
-  } from 'calcite-react/Form'
 import Menu, { MenuTitle, MenuItem } from 'calcite-react/Menu';
 import Button, { ButtonGroup } from 'calcite-react/Button';
+import PlayerList from "../PlayerList/PlayerList";
+import PlayerCardStories from "./PlayerCard.stories";
+import { DragSource } from 'react-dnd'
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -92,7 +88,7 @@ class PlayerCard extends Component {
     }
 
     return (
-      <Card bar="blue" style={{ margin: "0 480px", flex: "1 1 20%" }}>
+      <Card bar="blue" >
         <CardContent>
           <CardTitle>{name}</CardTitle>
           <Button onClick={() => this.setState({mode: "editable"})}>Edit</Button>
@@ -154,16 +150,19 @@ class PlayerCard extends Component {
       </Select>
 
       {/* wins */}
-      <TextField id="name" value={this.state.wins} onChange={this.handleWinsSelectChange} />
+      <TextField id="name" value={this.state.wins} onChange=
+      {this.handleWinsSelectChange} />
 
       {/* losses */}
-      <TextField id="name" value={this.state.losses} onChange={this.handleLossesSelectChange} />
+      <TextField id="name" value={this.state.losses} onChange=
+      {this.handleLossesSelectChange} />
 
       {/* button to switch state */}
       <Button onClick={() => 
         {
           const { name, plays, backhand, wins, losses, feet, inches } = this.state;
-          this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, inches})
+          this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, 
+            inches})
           this.setState({mode: "readOnly"})}}>Save</Button>
       </div>
     );
