@@ -5,14 +5,11 @@ import Select from 'calcite-react/Select';
 import Slider from 'calcite-react/Slider'
 import Menu, { MenuTitle, MenuItem } from 'calcite-react/Menu';
 import Button, { ButtonGroup } from 'calcite-react/Button';
-import PlayerList from "../PlayerList/PlayerList";
-import PlayerCardStories from "./PlayerCard.stories";
-import { DragSource } from 'react-dnd'
 
 class PlayerCard extends Component {
   constructor(props) {
     super(props);
-    const { name, plays, backhand, wins, losses, feet, inches } = props;
+    const { name, plays, backhand, wins, losses, feet, inches, mode } = props;
     this.state = {
       name, 
       plays, 
@@ -21,7 +18,7 @@ class PlayerCard extends Component {
       losses, 
       feet, 
       inches,
-      mode: "readOnly",
+      mode: mode ? mode : 'readOnly',
     }
   }
 
@@ -92,7 +89,6 @@ class PlayerCard extends Component {
         <CardContent>
           <CardTitle>{name}</CardTitle>
           <Button onClick={() => this.setState({mode: "editable"})}>Edit</Button>
-          {/* <Button onClick={this.openModal}>Edit</Button> */}
           <p>
             <li>height: {height}</li>
             <li>plays: {plays}</li>
@@ -161,8 +157,10 @@ class PlayerCard extends Component {
       <Button onClick={() => 
         {
           const { name, plays, backhand, wins, losses, feet, inches } = this.state;
-          this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, 
-            inches})
+          if(this.props.onPlayerUpdated) {
+            this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, 
+              inches});
+          } 
           this.setState({mode: "readOnly"})}}>Save</Button>
       </div>
     );

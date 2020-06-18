@@ -1,6 +1,6 @@
 import React from "react";
-import PlayerCard from "../PlayerCard/PlayerCard";
 import PlayerList from "./PlayerList";
+import playerData from './players.json';
 
 export default {
     title: 'PlayerList'
@@ -8,6 +8,8 @@ export default {
 
 export const myPlayerList = () => {
     return (
-    <PlayerList/>
+        <div>
+            <PlayerList players={playerData.players} test="my test string"/>
+        </div>
     );
 };
