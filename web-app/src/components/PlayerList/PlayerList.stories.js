@@ -1,15 +1,15 @@
 import React from "react";
 import PlayerList from "./PlayerList";
-import playerData from './players.json';
+import playerData from "../../data/players.json";
 
 export default {
-    title: 'PlayerList'
+  title: "PlayerList",
 };
 
 export const myPlayerList = () => {
-    return (
-        <div>
-            <PlayerList players={playerData.players} test="my test string"/>
-        </div>
-    );
+  return (
+    <div>
+      <PlayerList players={playerData.players} test="my test string" />
+    </div>
+  );
 };

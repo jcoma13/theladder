@@ -1,100 +1,101 @@
-import React from 'react';
-import Button, { ButtonGroup } from 'calcite-react/Button';
-import Modal from 'calcite-react/Modal'
-import PlayerCard from './PlayerCard/PlayerCard';
-import PlayerList from './PlayerList/PlayerList';
-import playerData from './PlayerList/players.json';
+import React from "react";
+import Button, { ButtonGroup } from "calcite-react/Button";
+import Modal from "calcite-react/Modal";
+import PlayerCard from "./PlayerCard/PlayerCard";
 
 class AddButton extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            // name, 
-            // plays, 
-            // backhand, 
-            // wins, 
-            // losses, 
-            // feet, 
-            // inches,
-            open: false,
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      // name,
+      // plays,
+      // backhand,
+      // wins,
+      // losses,
+      // feet,
+      // inches,
+      open: false,
+    };
+  }
 
-    openModal = () => {
+  openModal = () => {
     this.setState({
-        open: true,
-    })
-    }
+      open: true,
+    });
+  };
 
-    closeModal = () => {
+  closeModal = () => {
     this.setState({
-        open: false,
-    })
-    }
+      open: false,
+    });
+  };
 
-    updateName = (event) => {
-    this.setState({name: event.target.value})
-    }
+  updateName = (event) => {
+    this.setState({ name: event.target.value });
+  };
 
-    updateFeetSliderValue = (event) => {
-    this.setState({ feet: parseInt(event.target.value, 10) })
-    }
+  updateFeetSliderValue = (event) => {
+    this.setState({ feet: parseInt(event.target.value, 10) });
+  };
 
-    updateInchesSliderValue = (event) => {
-    this.setState({ inches: parseInt(event.target.value, 10) })
-    }
+  updateInchesSliderValue = (event) => {
+    this.setState({ inches: parseInt(event.target.value, 10) });
+  };
 
-    handlePlaysSelectChange = (value) => {
-    this.setState({ plays: value})
-    }
+  handlePlaysSelectChange = (value) => {
+    this.setState({ plays: value });
+  };
 
-    handleBackhandSelectChange = (value) => {
-    this.setState({ backhand: value})
-    }
+  handleBackhandSelectChange = (value) => {
+    this.setState({ backhand: value });
+  };
 
-    handleWinsSelectChange = (event) => {
-    this.setState({ wins: event.target.value})
-    }
+  handleWinsSelectChange = (event) => {
+    this.setState({ wins: event.target.value });
+  };
 
-    handleLossesSelectChange = (event) => {
-    this.setState({ losses: event.target.value})
-    }
+  handleLossesSelectChange = (event) => {
+    this.setState({ losses: event.target.value });
+  };
 
-    handlePlayerUpdated = (player) => {
-        this.closeModal();
-        console.log("clicked");
-    }
+  handlePlayerUpdated = (player) => {
+    this.closeModal();
+    console.log("clicked");
+  };
 
-    render() {
+  render() {
     // For the purpose of this example, we need to set a custom z-index on
     // the modal so it doesn't interfere with the side panel
-    const docsModalZIndex = { zIndex: 1001 }
+    const docsModalZIndex = { zIndex: 1001 };
 
     return (
-        <div>
+      <div>
         <Button onClick={this.openModal}>Add Rung</Button>
         <Modal
-            open={this.state.open}
-            onRequestClose={this.closeModal}
-            appElement={document.body}
-            overlayStyle={docsModalZIndex}
-            title="New Player"
-            secondaryActions={
+          open={this.state.open}
+          onRequestClose={this.closeModal}
+          appElement={document.body}
+          overlayStyle={docsModalZIndex}
+          title="New Player"
+          secondaryActions={
             <Button
-                key="cancel"
-                onClick={this.closeModal}
-                clearGray
-                iconPosition="before"
+              key="cancel"
+              onClick={this.closeModal}
+              clearGray
+              iconPosition="before"
             >
-                Cancel
+              Cancel
             </Button>
-            }
+          }
         >
-        <PlayerCard mode='editable' onPlayerUpdated={this.handlePlayerUpdated}/>
+          <PlayerCard
+            mode="editable"
+            onPlayerUpdated={this.handlePlayerUpdated}
+          />
         </Modal>
-        </div>
-    )
-    }
+      </div>
+    );
+  }
 }
 
 export default AddButton;
