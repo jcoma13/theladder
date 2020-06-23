@@ -16,8 +16,8 @@ class PlayerCard extends Component {
       backhand, 
       wins, 
       losses, 
-      feet, 
-      inches,
+      feet: 5, 
+      inches: 6,
       mode: mode ? mode : 'readOnly',
     }
   }
@@ -103,16 +103,17 @@ class PlayerCard extends Component {
   }
 
   getEditableCard() {
-    //TODO editable card ;-)
     return (
       <div style={{display: "flex", flexDirection:"column"}}>
       {/* name */}
-      <TextField id="name" value={this.state.name} onChange={this.updateName}/>
-      
+      <TextField placeholder ="Enter name" id="name" value={this.state.name} 
+      onChange={this.updateName}/>
+
       {/* height (feet)  */}
       <Slider
           min={0}
           max={8}
+          defaultValue={5}
           value = {this.state.feet}
           onChange={this.updateFeetSliderValue}
       />
@@ -122,12 +123,16 @@ class PlayerCard extends Component {
       <Slider
           min={0}
           max={11}
+          defaultValue={6}
           value = {this.state.inches}
           onChange={this.updateInchesSliderValue}
       /> 
       <div>{this.state.inches + '"'}</div>
 
       {/* plays (handedness) */}
+      <div>
+        Handedness:
+      </div>
       <Select
         onChange={this.handlePlaysSelectChange}
         selectedValue={this.state.plays}
@@ -137,6 +142,9 @@ class PlayerCard extends Component {
       </Select>
       
       {/* backhand type */}
+      <div>
+        Backhand type:
+      </div>
       <Select
           onChange={this.handleBackhandSelectChange}
           selectedValue={this.state.backhand}
@@ -146,12 +154,12 @@ class PlayerCard extends Component {
       </Select>
 
       {/* wins */}
-      <TextField id="name" value={this.state.wins} onChange=
-      {this.handleWinsSelectChange} />
+      <TextField placeholder="# of wins" id="name" value={this.state.wins} 
+      onChange={this.handleWinsSelectChange} />
 
       {/* losses */}
-      <TextField id="name" value={this.state.losses} onChange=
-      {this.handleLossesSelectChange} />
+      <TextField placeholder="# of losses" id="name" value={this.state.losses} 
+      onChange={this.handleLossesSelectChange} />
 
       {/* button to switch state */}
       <Button onClick={() => 
