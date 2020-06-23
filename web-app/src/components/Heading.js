@@ -13,9 +13,6 @@ const Heading = (props) => {
                 <h4 className='rung'>Click the "Add Rung" button to add more 
                 slots on your ladder.</h4>
             </div>
-            <div className='btn'>
-                <button onClick={() => console.log('clicked')}>Add Rung</button>
-            </div>
         </div>
      );
 }

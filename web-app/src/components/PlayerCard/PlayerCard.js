@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import TextField from 'calcite-react/TextField';
 import Select from 'calcite-react/Select';
 import Slider from 'calcite-react/Slider'
-import Menu, { MenuTitle, MenuItem } from 'calcite-react/Menu';
-import Button, { ButtonGroup } from 'calcite-react/Button';
+import MenuItem from 'calcite-react/Menu';
+import Button from 'calcite-react/Button';
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -108,7 +108,7 @@ class PlayerCard extends Component {
       <div style={{display: "flex", flexDirection:"column"}}>
       {/* name */}
       <TextField id="name" value={this.state.name} onChange={this.updateName}/>
-
+      
       {/* height (feet)  */}
       <Slider
           min={0}
