@@ -8,7 +8,7 @@ import AddButton from "./components/AddButton";
 class App extends React.Component {
   //TODO: create eventHandler for onPlayerAdd. {DONE}
   //TODO: initialize Player List with state.players {DONE}
-  //TODO: On Player List Order change. update App's state.players
+  //TODO: On Player List Order change. update App's state.players {DONE}
 
   constructor(props) {
     super(props);
@@ -22,9 +22,9 @@ class App extends React.Component {
     playersCopy.push(player);
     this.setState({players: playersCopy})
   };
-
-  onPlayerListOrderChange = () => {
-    this.setState({players: this.state.players});
+  
+  onPlayerListOrderChange = (sortedPlayers) => {
+    this.setState({players: sortedPlayers});
   }
 
   //talk to server functions
@@ -40,7 +40,8 @@ class App extends React.Component {
           <AddButton onPlayerAdd={this.handlePlayerAdd} />
         </div>
         {/* use onPlayerListOrderChange() here to make sure order is updated */}
-          <PlayerList players={this.state.players}/>
+          <PlayerList players={this.state.players} 
+          onOrderChange={this.onPlayerListOrderChange}/>
       </div>
     );
   }

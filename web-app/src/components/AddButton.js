@@ -1,5 +1,5 @@
 import React from "react";
-import Button, { ButtonGroup } from "calcite-react/Button";
+import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import PropTypes from 'prop-types';
@@ -23,8 +23,6 @@ class AddButton extends React.Component {
       open: false,
     });
   };
-
-  
 
   handlePlayerUpdated = (player) => {
     this.props.onPlayerAdd(player);

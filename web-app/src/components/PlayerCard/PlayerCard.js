@@ -1,4 +1,4 @@
-import Card, { CardTitle, CardContent, CardImage } from "calcite-react/Card";
+import Card, { CardTitle, CardContent } from "calcite-react/Card";
 import React, { Component } from "react";
 import TextField from 'calcite-react/TextField';
 import Select from 'calcite-react/Select';
@@ -9,16 +9,15 @@ import Button from 'calcite-react/Button';
 class PlayerCard extends Component {
   constructor(props) {
     super(props);
-    const { name, plays, backhand, wins, losses, feet, inches, mode } = props;
     this.state = {
-      name, 
-      plays, 
-      backhand, 
-      wins, 
-      losses, 
-      feet: 5, 
-      inches: 6,
-      mode: mode ? mode : 'readOnly',
+      name: props.name, 
+      plays: props.plays, 
+      backhand: props.backhand, 
+      wins: props.wins, 
+      losses: props.losses, 
+      feet: props.feet ? props.feet : 5, 
+      inches: props.inches || props.inches === 0 ? props.inches : 6,
+      mode: props.mode ? props.mode : 'readOnly',
     }
   }
 
@@ -108,7 +107,7 @@ class PlayerCard extends Component {
       {/* name */}
       <TextField placeholder ="Enter name" id="name" value={this.state.name} 
       onChange={this.updateName}/>
-
+      
       {/* height (feet)  */}
       <Slider
           min={0}

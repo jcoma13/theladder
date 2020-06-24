@@ -17,37 +17,28 @@ const SortableItem = SortableElement(({ player }) => {
   );
 });
 
-const SortableList = SortableContainer(({ players }) => {
-  return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {players.map((player, index) => (
-        <SortableItem key={`player-${index}`} index={index} player={player} />
-      ))}
-    </div>
-  );
-});
+const PlayerList = (props) => {
 
-class SortableComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      players: props.players,
-    };
-  }
-
-  onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(({ players }) => ({
-      players: arrayMove(players, oldIndex, newIndex),
-    }));
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    const sortedPlayers = arrayMove(props.players, oldIndex, newIndex);
+    props.onOrderChange(sortedPlayers);
   };
 
-  render() {
+  const SortableList = SortableContainer(({ players }) => {
     return (
-      <div>
-        <SortableList players={this.state.players} onSortEnd={this.onSortEnd} />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {players.map((player, index) => (
+          <SortableItem key={`player-${index}`} index={index} player={player} />
+        ))}
       </div>
     );
-  }
+  });
+
+  return (
+    <div>
+      <SortableList players={props.players} onSortEnd={onSortEnd} />
+    </div>
+  )
 }
 
-export default SortableComponent;
+export default PlayerList;
