@@ -4,21 +4,10 @@ import arrayMove from "array-move";
 import PlayerCard from "../PlayerCard/PlayerCard";
 
 const SortableItem = SortableElement(({ player }) => {
-  return (
-    <PlayerCard
-      name={player.name}
-      feet={player.feet}
-      inches={player.inches}
-      plays={player.plays}
-      backhand={player.backhand}
-      wins={player.wins}
-      losses={player.losses}
-    />
-  );
+  return <PlayerCard player={player} />;
 });
 
 const PlayerList = (props) => {
-
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const sortedPlayers = arrayMove(props.players, oldIndex, newIndex);
     props.onOrderChange(sortedPlayers);
@@ -28,9 +17,7 @@ const PlayerList = (props) => {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
         {players.map((player, index) => (
-          <SortableItem key={`player-${index}`} 
-          index={index} 
-          player={player} />
+          <SortableItem key={`player-${index}`} index={index} player={player} />
         ))}
       </div>
     );
@@ -39,9 +26,9 @@ const PlayerList = (props) => {
   return (
     <div>
       {/* use indexOf method here to reassign indices to cards in array */}
-      <SortableList players={props.players} onSortEnd={onSortEnd}/>
+      <SortableList players={props.players} onSortEnd={onSortEnd} />
     </div>
-  )
-}
+  );
+};
 
 export default PlayerList;
