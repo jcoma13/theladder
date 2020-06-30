@@ -25,9 +25,9 @@ class AddButton extends React.Component {
   };
 
   handlePlayerUpdated = (player) => {
+    //is it edit or add (add=add, otherwise, override settings of method)
     this.props.onPlayerAdd(player);
     this.closeModal();
-    console.log("clicked");
   };
 
   render() {

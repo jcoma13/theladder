@@ -5,19 +5,26 @@ import Select from 'calcite-react/Select';
 import Slider from 'calcite-react/Slider'
 import MenuItem from 'calcite-react/Menu';
 import Button from 'calcite-react/Button';
+import Form, {
+  FormControl,
+} from 'calcite-react/Form'
+import { FaEdit } from "react-icons/fa";
+import EditButton from "../EditButton";
 
 class PlayerCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name, 
-      plays: props.plays, 
-      backhand: props.backhand, 
-      wins: props.wins, 
-      losses: props.losses, 
-      feet: props.feet ? props.feet : 5, 
-      inches: props.inches || props.inches === 0 ? props.inches : 6,
-      mode: props.mode ? props.mode : 'readOnly',
+      name: props.player.name, 
+      plays: props.player.plays, 
+      backhand: props.player.backhand, 
+      wins: props.player.wins, 
+      losses: props.player.losses, 
+      // conditional statement to check if there is a given height (feet) for player
+      feet: props.player.feet ? props.player.feet : 0, 
+      // conditional statement to check if there is a given height (in.) for player
+      inches: props.player.inches || props.player.inches === 0 ? props.player.inches : 0,
+      mode: props.player.mode ? props.player.mode : 'readOnly',
     }
   }
 
@@ -59,7 +66,6 @@ class PlayerCard extends Component {
       height = feet + "' " + inchesFormatted + '"';
     }
 
-    //TODO: set record color based on wins vs losses
     var recordColor = "blue";
     if (wins === null || losses === null) {
         recordColor = "orange";
@@ -71,7 +77,6 @@ class PlayerCard extends Component {
         recordColor = "blue";
     }
 
-    //TODO: Format record text
     let record = "TBD";
     if (wins === null && losses === null) {
         record = "TBD"
@@ -83,19 +88,32 @@ class PlayerCard extends Component {
         record = wins + "-" + losses;
     }
 
+    const indexOf = (array, player) => {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] === player) {
+          console.log(i);
+          return i;
+        }
+      }
+      // method that gets index of card
+    }
+
     return (
-      <Card bar="blue" >
+      <Card bar="blue" style={{ maxWidth: '375px', textAlign: 'center', 
+      padding: 0 }} >
         <CardContent>
-          <CardTitle>{name}</CardTitle>
-          <Button onClick={() => this.setState({mode: "editable"})}>Edit</Button>
-          <p>
-            <li>height: {height}</li>
-            <li>plays: {plays}</li>
-            <li>backhand: {backhand}</li>
-            <li>
-              record: <span style={{ color: recordColor }}>{record}</span>
-            </li>
-          </p>
+          {/* use indexOf method here next to name */}
+          <CardTitle>
+            {name}
+            {/* <Button
+              iconButton
+              icon={<FaEdit size={15} />}
+              onClick={() => this.setState({mode: "editable"})}/> */}
+          </CardTitle>
+          <EditButton />
+          {/* <Button extraSmall onClick={() => this.setState({mode: "editable"})}>Edit</Button> */}
+            {height} :: {plays} :: {backhand} backhand   
+            <span style={{ color: recordColor }}>{record}</span>
         </CardContent>
       </Card>
     );
@@ -103,30 +121,53 @@ class PlayerCard extends Component {
 
   getEditableCard() {
     return (
-      <div style={{display: "flex", flexDirection:"column"}}>
+      <div>
       {/* name */}
-      <TextField placeholder ="Enter name" id="name" value={this.state.name} 
+      <div>
+        Name:
+      </div>
+      <TextField placeholder ="ex: Jansen Comadena" id="name" value={this.state.name} 
       onChange={this.updateName}/>
       
       {/* height (feet)  */}
-      <Slider
-          min={0}
-          max={8}
-          defaultValue={5}
-          value = {this.state.feet}
-          onChange={this.updateFeetSliderValue}
-      />
-      <div>{this.state.feet + "'"}</div>
+      <div>
+        Feet:
+      </div>
+      <Form horizontal>
+            <TextField
+              type="number"
+              value={this.state.feet}
+              onChange={this.updateFeetSliderValue}
+            />
+          <FormControl style={{ flex: '1 0 100px' }}>
+            <Slider
+              min={0}
+              max={8}
+              value={this.state.feet}
+              onChange={this.updateFeetSliderValue}
+            />
+          </FormControl>
+        </Form>
 
       {/* height (inches) */}
-      <Slider
-          min={0}
-          max={11}
-          defaultValue={6}
-          value = {this.state.inches}
-          onChange={this.updateInchesSliderValue}
-      /> 
-      <div>{this.state.inches + '"'}</div>
+      <div>
+        Inches:
+      </div>
+      <Form horizontal>
+            <TextField
+              type="number"
+              value={this.state.inches}
+              onChange={this.updateInchesSliderValue}
+            />
+          <FormControl style={{ flex: '1 0 100px' }}>
+            <Slider
+              min={0}
+              max={11}
+              value={this.state.inches}
+              onChange={this.updateInchesSliderValue}
+            />
+          </FormControl>
+        </Form>
 
       {/* plays (handedness) */}
       <div>
@@ -153,11 +194,17 @@ class PlayerCard extends Component {
       </Select>
 
       {/* wins */}
-      <TextField placeholder="# of wins" id="name" value={this.state.wins} 
+      <div>
+        # of wins:
+      </div>
+      <TextField placeholder="ex: 8" id="name" value={this.state.wins} 
       onChange={this.handleWinsSelectChange} />
 
       {/* losses */}
-      <TextField placeholder="# of losses" id="name" value={this.state.losses} 
+      <div>
+        # of losses:
+      </div>
+      <TextField placeholder="ex: 5" id="name" value={this.state.losses} 
       onChange={this.handleLossesSelectChange} />
 
       {/* button to switch state */}

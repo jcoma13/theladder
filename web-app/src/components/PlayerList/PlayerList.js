@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import arrayMove from "array-move";
 import PlayerCard from "../PlayerCard/PlayerCard";
@@ -28,7 +28,9 @@ const PlayerList = (props) => {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
         {players.map((player, index) => (
-          <SortableItem key={`player-${index}`} index={index} player={player} />
+          <SortableItem key={`player-${index}`} 
+          index={index} 
+          player={player} />
         ))}
       </div>
     );
@@ -36,7 +38,8 @@ const PlayerList = (props) => {
 
   return (
     <div>
-      <SortableList players={props.players} onSortEnd={onSortEnd} />
+      {/* use indexOf method here to reassign indices to cards in array */}
+      <SortableList players={props.players} onSortEnd={onSortEnd}/>
     </div>
   )
 }
