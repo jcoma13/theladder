@@ -2,7 +2,7 @@ import React from "react";
 import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import PlayerCard from "./PlayerCard/PlayerCard";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 class EditButton extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class EditButton extends React.Component {
     });
   };
 
-  handlePlayerUpdated = (player) => {
+  handlePlayerUpdated = player => {
     this.props.onPlayerAdd(player);
     this.closeModal();
   };
@@ -34,7 +34,9 @@ class EditButton extends React.Component {
 
     return (
       <div>
-        <Button extraSmall onClick={this.openModal}>Edit</Button>
+        <Button extraSmall onClick={this.openModal}>
+          Edit
+        </Button>
         <Modal
           open={this.state.open}
           onRequestClose={this.closeModal}
@@ -71,89 +73,89 @@ EditButton.defaultProps = {
 
 export default EditButton;
 
-    //     <Modal
-    //       open={true}
-    //       onRequestClose={this.closeModal}
-    //       appElement={document.body}
-    //       overlayStyle={1001}
-    //       secondaryActions={
-    //         <Button
-    //           key="cancel"
-    //           onClick={this.closeModal}
-    //           clearGray
-    //           iconPosition="before"
-    //         >
-    //           Cancel
-    //         </Button>
-    //       }
-    //     >
-    //   {/* name */}
-    //   <TextField placeholder ="Enter name" id="name" value={this.state.name} 
-    //   onChange={this.updateName}/>
-      
-    //   {/* height (feet)  */}
-    //   <Slider
-    //       min={0}
-    //       max={8}
-    //       value = {this.state.feet}
-    //       onChange={this.updateFeetSliderValue}
-    //   />
-    //   <div>{this.state.feet + "'"}</div>
+//     <Modal
+//       open={true}
+//       onRequestClose={this.closeModal}
+//       appElement={document.body}
+//       overlayStyle={1001}
+//       secondaryActions={
+//         <Button
+//           key="cancel"
+//           onClick={this.closeModal}
+//           clearGray
+//           iconPosition="before"
+//         >
+//           Cancel
+//         </Button>
+//       }
+//     >
+//   {/* name */}
+//   <TextField placeholder ="Enter name" id="name" value={this.state.name}
+//   onChange={this.updateName}/>
 
-    //   {/* height (inches) */}
-    //   <Slider
-    //       min={0}
-    //       max={11}
-    //       value = {this.state.inches}
-    //       onChange={this.updateInchesSliderValue}
-    //   /> 
-    //   <div>{this.state.inches + '"'}</div>
+//   {/* height (feet)  */}
+//   <Slider
+//       min={0}
+//       max={8}
+//       value = {this.state.feet}
+//       onChange={this.updateFeetSliderValue}
+//   />
+//   <div>{this.state.feet + "'"}</div>
 
-    //   {/* plays (handedness) */}
-    //   <div>
-    //     Handedness:
-    //   </div>
-    //   <Select
-    //     onChange={this.handlePlaysSelectChange}
-    //     selectedValue={this.state.plays}
-    //   >
-    //     <MenuItem value="right-handed">Right-Handed</MenuItem>
-    //     <MenuItem value="left-handed">Left-Handed</MenuItem>
-    //   </Select>
-      
-    //   {/* backhand type */}
-    //   <div>
-    //     Backhand type:
-    //   </div>
-    //   <Select
-    //       onChange={this.handleBackhandSelectChange}
-    //       selectedValue={this.state.backhand}
-    //   >
-    //       <MenuItem value="one-handed">One-Handed</MenuItem>
-    //       <MenuItem value="two-handed">Two-Handed</MenuItem>
-    //   </Select>
+//   {/* height (inches) */}
+//   <Slider
+//       min={0}
+//       max={11}
+//       value = {this.state.inches}
+//       onChange={this.updateInchesSliderValue}
+//   />
+//   <div>{this.state.inches + '"'}</div>
 
-    //   {/* wins */}
-    //   <div>
-    //     # of wins:
-    //   </div>
-    //   <TextField placeholder="Enter # of wins" id="name" value={this.state.wins} 
-    //   onChange={this.handleWinsSelectChange} />
+//   {/* plays (handedness) */}
+//   <div>
+//     Handedness:
+//   </div>
+//   <Select
+//     onChange={this.handlePlaysSelectChange}
+//     selectedValue={this.state.plays}
+//   >
+//     <MenuItem value="right-handed">Right-Handed</MenuItem>
+//     <MenuItem value="left-handed">Left-Handed</MenuItem>
+//   </Select>
 
-    //   {/* losses */}
-    //   <div>
-    //     # of losses:
-    //   </div>
-    //   <TextField placeholder="Enter # of losses" id="name" value={this.state.losses} 
-    //   onChange={this.handleLossesSelectChange} />
+//   {/* backhand type */}
+//   <div>
+//     Backhand type:
+//   </div>
+//   <Select
+//       onChange={this.handleBackhandSelectChange}
+//       selectedValue={this.state.backhand}
+//   >
+//       <MenuItem value="one-handed">One-Handed</MenuItem>
+//       <MenuItem value="two-handed">Two-Handed</MenuItem>
+//   </Select>
 
-    //   {/* button to switch state */}
-    //   <Button onClick={() => 
-    //     {
-    //       const { name, plays, backhand, wins, losses, feet, inches } = this.state;
-    //       if(this.props.onPlayerUpdated) {
-    //         this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet, 
-    //           inches});
-    //       } 
-    //       this.setState({mode: "readOnly"})}}>Save</Button>
-    //   </Modal>
+//   {/* wins */}
+//   <div>
+//     # of wins:
+//   </div>
+//   <TextField placeholder="Enter # of wins" id="name" value={this.state.wins}
+//   onChange={this.handleWinsSelectChange} />
+
+//   {/* losses */}
+//   <div>
+//     # of losses:
+//   </div>
+//   <TextField placeholder="Enter # of losses" id="name" value={this.state.losses}
+//   onChange={this.handleLossesSelectChange} />
+
+//   {/* button to switch state */}
+//   <Button onClick={() =>
+//     {
+//       const { name, plays, backhand, wins, losses, feet, inches } = this.state;
+//       if(this.props.onPlayerUpdated) {
+//         this.props.onPlayerUpdated({name, plays, backhand, wins, losses, feet,
+//           inches});
+//       }
+//       this.setState({mode: "readOnly"})}}>Save</Button>
+//   </Modal>

@@ -33,6 +33,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "prettier": {
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

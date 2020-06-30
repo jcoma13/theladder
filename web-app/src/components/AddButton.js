@@ -2,7 +2,7 @@ import React from "react";
 import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import PlayerCard from "./PlayerCard/PlayerCard";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 class AddButton extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class AddButton extends React.Component {
     });
   };
 
-  handlePlayerUpdated = (player) => {
+  handlePlayerUpdated = player => {
     //is it edit or add (add=add, otherwise, override settings of method)
     this.props.onPlayerAdd(player);
     this.closeModal();
