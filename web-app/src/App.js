@@ -3,11 +3,11 @@ import "./App.css";
 import Heading from "./components/Heading";
 import PlayerList from "./components/PlayerList/PlayerList";
 import playerData from "./data/players.json";
-// import AddButton from "./components/AddButton";
 import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import PlayerCard from "./components/PlayerCard/PlayerCard";
-import helpers from "./utils/helpers";
+import {getNewPlayer} from "./utils/helpers";
+import AddButton from "./components/AddButton";
 
 class App extends React.Component {
 
@@ -60,7 +60,6 @@ class App extends React.Component {
             alignItems: "center"
           }}>
         <Button onClick={this.openModal}>Add Rung</Button>
-        </div>
         <Modal
           open={this.state.open}
           onRequestClose={this.closeModal}
@@ -79,10 +78,12 @@ class App extends React.Component {
           }
         >
           <PlayerCard
+            player={getNewPlayer(this.state.players.length)}
             mode="editable"
-            onPlayerUpdated={this.handlePlayerUpdated}
+            onPlayerUpdate={this.handlePlayerUpdated}
           />
         </Modal>
+        </div>
         <div className='List' style={{
           display: "flex",
           justifyContent: "center",

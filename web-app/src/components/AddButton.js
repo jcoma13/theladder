@@ -3,6 +3,7 @@ import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import PropTypes from "prop-types";
+import {getNewPlayer} from "../utils/helpers";
 
 class AddButton extends React.Component {
   constructor(props) {
@@ -54,8 +55,9 @@ class AddButton extends React.Component {
           }
         >
           <PlayerCard
+            player={getNewPlayer(this.state.players.length)}
             mode="editable"
-            onPlayerUpdated={this.handlePlayerUpdated}
+            onPlayerAdd={this.handlePlayerAdd}
           />
         </Modal>
       </div>

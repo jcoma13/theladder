@@ -8,5 +8,6 @@ export function getNewPlayer(id) {
     backhand: "",
     wins: null,
     losses: null,
+    mode: "editable"
   };
 }

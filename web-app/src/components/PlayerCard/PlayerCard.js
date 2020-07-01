@@ -6,8 +6,9 @@ import Slider from "calcite-react/Slider";
 import MenuItem from "calcite-react/Menu";
 import Button from "calcite-react/Button";
 import Form, { FormControl } from "calcite-react/Form";
-import { FaEdit } from "react-icons/fa";
+import Modal from "calcite-react/Modal";
 import EditButton from "../EditButton";
+// import { FaEdit } from "react-icons/fa";
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -114,8 +115,8 @@ class PlayerCard extends Component {
               icon={<FaEdit size={15} />}
               onClick={() => this.setState({mode: "editable"})}/> */}
           </CardTitle>
-          <EditButton />
-          {/* <Button extraSmall onClick={() => this.setState({mode: "editable"})}>Edit</Button> */}
+          {/* <EditButton /> */}
+          <Button extraSmall onClick={() => this.setState({mode: "editable"})}>Edit</Button>
           {height} :: {plays} :: {backhand} backhand
           <span style={{ color: recordColor }}>{record}</span>
         </CardContent>
@@ -124,7 +125,24 @@ class PlayerCard extends Component {
   }
 
   getEditableCard() {
+    const docsModalZIndex = { zIndex: 1001 };
     return (
+      <Modal
+          open={this.state.mode === "editable"}
+          onRequestClose={this.closeModal}
+          appElement={document.body}
+          overlayStyle={docsModalZIndex}
+          secondaryActions={
+            <Button
+              key="cancel"
+              onClick={this.closeModal}
+              clearGray
+              iconPosition="before"
+            >
+              Cancel
+            </Button>
+          }
+        >
       <div>
         {/* name */}
         <div>Name:</div>
@@ -238,7 +256,9 @@ class PlayerCard extends Component {
         >
           Save
         </Button>
+
       </div>
+      </Modal>
     );
   }
 
