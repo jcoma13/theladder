@@ -7,10 +7,11 @@ import MenuItem from "calcite-react/Menu";
 import Button from "calcite-react/Button";
 import Form, { FormControl } from "calcite-react/Form";
 import Modal from "calcite-react/Modal";
-import EditAttributesIcon from 'calcite-ui-icons-react/EditAttributesIcon';
-import { Move } from 'react-bytesize-icons';
-import { Draggable } from 'react-beautiful-dnd';
-import styled from 'styled-components';
+import EditAttributesIcon from "calcite-ui-icons-react/EditAttributesIcon";
+import { Move } from "react-bytesize-icons";
+import { Draggable } from "react-beautiful-dnd";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -117,51 +118,58 @@ class PlayerCard extends Component {
     // };
 
     const Container = styled.div`
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    padding: 0px;
-    margin-bottom: 8px;
-    background-color: white;
+      border: 1px solid lightgrey;
+      border-radius: 2px;
+      padding: 0px;
+      margin-bottom: 8px;
+      background-color: white;
     `;
 
-    var cardContent = (<Card
-          bar="blue"
-          style={{ maxWidth: "375px", textAlign: "center", padding: 0 }}
+    var cardContent = (
+      <Card
+        bar="blue"
+        style={{ maxWidth: "375px", textAlign: "center", padding: 0 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
         >
-          <div style={{
-              display: "flex",
-              justifyContent: "flex-end",
-            }}>
-            <Move width={12} height={12} />
-          </div>
-          <CardContent style={{margin: -8}}>
-            {/* use indexOf method here next to name */}
-            <CardTitle>
-              {name}
-              <Button
-                iconButton
-                icon={<EditAttributesIcon size={15}/> }
-                onClick={() => this.setState({mode: "editable"})}
-                />
-            </CardTitle>
-            {height} :: {plays} :: {backhand} backhand
-            <span style={{ color: recordColor }}>{record}</span>
-          </CardContent>
-        </Card>)
+          <Move width={12} height={12} />
+        </div>
+        <CardContent style={{ margin: -8 }}>
+          {/* use indexOf method here next to name */}
+          <CardTitle>
+            {name}
+            <Button
+              iconButton
+              icon={<EditAttributesIcon size={15} />}
+              onClick={() => this.setState({ mode: "editable" })}
+            />
+          </CardTitle>
+          {height} :: {plays} :: {backhand} backhand
+          <span style={{ color: recordColor }}>{record}</span>
+        </CardContent>
+      </Card>
+    );
 
     if (this.props.isModal === true) {
       return cardContent;
     } else {
       return (
-        <Draggable draggableId={this.props.player.id} index={this.props.index}>
-          {provided => (
-              <Container
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                ref={provided.innerRef}
-              >
-                {cardContent}
-              </Container>
+        <Draggable
+          draggableId={String(this.props.player.id)}
+          index={this.props.index}
+        >
+          {(provided) => (
+            <Container
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+            >
+              {cardContent}
+            </Container>
           )}
         </Draggable>
       );
@@ -170,7 +178,7 @@ class PlayerCard extends Component {
 
   getEditableCard() {
     const docsModalZIndex = { zIndex: 1001 };
-    
+
     var cardInfo = (
       <div>
         {/* name */}
@@ -181,7 +189,7 @@ class PlayerCard extends Component {
           value={this.state.name}
           onChange={this.updateName}
         />
-        
+
         {/* height (feet)  */}
         <div>Feet:</div>
         <Form horizontal>
@@ -199,7 +207,7 @@ class PlayerCard extends Component {
             />
           </FormControl>
         </Form>
-        
+
         {/* height (inches) */}
         <div>Inches:</div>
         <Form horizontal>
@@ -217,7 +225,7 @@ class PlayerCard extends Component {
             />
           </FormControl>
         </Form>
-        
+
         {/* plays (handedness) */}
         <div>Handedness:</div>
         <Select
@@ -227,7 +235,7 @@ class PlayerCard extends Component {
           <MenuItem value="right-handed">Right-Handed</MenuItem>
           <MenuItem value="left-handed">Left-Handed</MenuItem>
         </Select>
-        
+
         {/* backhand type */}
         <div>Backhand type:</div>
         <Select
@@ -237,7 +245,7 @@ class PlayerCard extends Component {
           <MenuItem value="one-handed">One-Handed</MenuItem>
           <MenuItem value="two-handed">Two-Handed</MenuItem>
         </Select>
-        
+
         {/* wins */}
         <div># of wins:</div>
         <TextField
@@ -246,7 +254,7 @@ class PlayerCard extends Component {
           value={this.state.wins}
           onChange={this.handleWinsSelectChange}
         />
-        
+
         {/* losses */}
         <div># of losses:</div>
         <TextField
@@ -255,7 +263,7 @@ class PlayerCard extends Component {
           value={this.state.losses}
           onChange={this.handleLossesSelectChange}
         />
-        
+
         {/* button to switch state */}
         <Button
           onClick={() => {
@@ -268,18 +276,16 @@ class PlayerCard extends Component {
               feet,
               inches,
             } = this.state;
-            if (this.props.onPlayerUpdated) {
-              this.props.onPlayerUpdated({
-                id: this.state.playerId,
-                name,
-                plays,
-                backhand,
-                wins,
-                losses,
-                feet,
-                inches,
-              });
-            }
+            this.props.onPlayerUpdated({
+              id: this.state.playerId,
+              name,
+              plays,
+              backhand,
+              wins,
+              losses,
+              feet,
+              inches,
+            });
             this.setState({ mode: "readOnly" });
             this.closeModal();
           }}
@@ -287,28 +293,28 @@ class PlayerCard extends Component {
           Save
         </Button>
       </div>
-    )
-    
+    );
+
     return (
       <Modal
-          open={this.state.mode === "editable"}
-          onRequestClose={this.closeModal}
-          appElement={document.body}
-          overlayStyle={docsModalZIndex}
-          secondaryActions={
-            <Button
-              key="cancel"
-              onClick={() => {
-                this.setState({mode: "readOnly"});
-                this.props.onPlayerUpdateCancel();
-              }}
-              clearGray
-              iconPosition="before"
-            >
-              Cancel
-            </Button>
-          }
-        >
+        open={this.state.mode === "editable"}
+        onRequestClose={this.closeModal}
+        appElement={document.body}
+        overlayStyle={docsModalZIndex}
+        secondaryActions={
+          <Button
+            key="cancel"
+            onClick={() => {
+              this.setState({ mode: "readOnly" });
+              this.props.onPlayerUpdateCancel();
+            }}
+            clearGray
+            iconPosition="before"
+          >
+            Cancel
+          </Button>
+        }
+      >
         {cardInfo}
       </Modal>
     );
@@ -323,5 +329,15 @@ class PlayerCard extends Component {
     return "unhandled mode" + this.state.mode;
   }
 }
+
+PlayerCard.propTypes = {
+  onPlayerUpdated: PropTypes.func,
+  onPlayerUpdateCancel: PropTypes.func,
+};
+
+PlayerCard.defaultProps = {
+  onPlayerUpdated: () => {},
+  onPlayerUpdateCancel: () => {},
+};
 
 export default PlayerCard;

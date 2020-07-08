@@ -1,18 +1,12 @@
 import React from "react";
 import "./App.css";
 import Heading from "./components/Heading";
-// import PlayerList from "./components/PlayerList/PlayerList";
-import PlayerList2 from "./components/PlayerList2/PlayerList2";
+import PlayerList from "./components/PlayerList";
 import playerData from "./data/players.json";
-// import initialData from './components/PlayerList2/initial-data';
-// import Button from "calcite-react/Button";
-// import Modal from "calcite-react/Modal";
-// import PlayerCard from "./components/PlayerCard/PlayerCard";
-// import {getNewPlayer} from "./utils/helpers";
+
 import AddButton from "./components/AddButton";
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +18,12 @@ class App extends React.Component {
   handlePlayerAdd = (player) => {
     let playersCopy = [...this.state.players];
     playersCopy.push(player);
-    this.setState({players: playersCopy})
-  }
-  
+    this.setState({ players: playersCopy });
+  };
+
   onPlayerListOrderChange = (sortedPlayers) => {
-    this.setState({players: sortedPlayers});
-  }
+    this.setState({ players: sortedPlayers });
+  };
 
   openModal = () => {
     this.setState({
@@ -44,7 +38,7 @@ class App extends React.Component {
   };
 
   handlePlayerUpdated = (player) => {
-    // loop over players, check if ids are the same with updated player and old 
+    // loop over players, check if ids are the same with updated player and old
     // player then replace old player, otherwise don't swap
     this.props.onPlayerAdd(player);
     this.closeModal();
@@ -54,25 +48,31 @@ class App extends React.Component {
   render() {
     // const docsModalZIndex = { zIndex: 1001 };
     return (
-      <div className='Heading'>
+      <div className="Heading">
         <Heading />
-        <div className='AddButton' style={{
+        <div
+          className="AddButton"
+          style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
-        }}>
-          <AddButton 
-            newPlayerId={this.state.players.length} 
+            alignItems: "center",
+          }}
+        >
+          <AddButton
+            newPlayerId={this.state.players.length + 1}
             onPlayerAdd={this.handlePlayerAdd}
           />
         </div>
-        <div className='List' style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
-          <PlayerList2 
-            players={this.state.players} 
+        <div
+          className="List"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <PlayerList
+            players={this.state.players}
             onOrderChange={this.onPlayerListOrderChange}
           />
         </div>

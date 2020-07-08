@@ -1,33 +1,43 @@
 import React from "react";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+// import ReactDOM from 'react-dom';
+import "@atlaskit/css-reset";
+import { DragDropContext } from "react-beautiful-dnd";
 import arrayMove from "array-move";
-import PlayerCard from "../PlayerCard/PlayerCard";
-
-const SortableItem = SortableElement(({ player }) => {
-  return <PlayerCard player={player} />;
-});
+import DroppablePlayerList from "./DroppablePlayerList";
 
 const PlayerList = (props) => {
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    const sortedPlayers = arrayMove(props.players, oldIndex, newIndex);
+  const onDragEnd = (result) => {
+    // dropped outside the list
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    const sortedPlayers = arrayMove(
+      props.players,
+      source.index,
+      destination.index
+    );
+
     props.onOrderChange(sortedPlayers);
   };
 
-  const SortableList = SortableContainer(({ players }) => {
-    return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {players.map((player, index) => (
-          <SortableItem key={`player-${index}`} index={index} player={player} />
-        ))}
-      </div>
-    );
-  });
-
   return (
-    <div>
-      {/* use indexOf method here to reassign indices to cards in array */}
-      <SortableList players={props.players} onSortEnd={onSortEnd} />
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <DroppablePlayerList
+        key="PlayerList"
+        title="Players"
+        columnId="playerList"
+        players={props.players}
+      />
+    </DragDropContext>
   );
 };
 
