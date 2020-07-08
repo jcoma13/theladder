@@ -107,16 +107,6 @@ class PlayerCard extends Component {
       record = wins + "-" + losses;
     }
 
-    // const indexOf = (array, player) => {
-    //   for (var i = 0; i < array.length; i++) {
-    //     if (array[i] === player) {
-    //       console.log(i);
-    //       return i;
-    //     }
-    //   }
-    //   // method that gets index of card
-    // };
-
     const Container = styled.div`
       border: 1px solid lightgrey;
       border-radius: 2px;
@@ -139,7 +129,6 @@ class PlayerCard extends Component {
           <Move width={12} height={12} />
         </div>
         <CardContent style={{ margin: -8 }}>
-          {/* use indexOf method here next to name */}
           <CardTitle>
             {name}
             <Button

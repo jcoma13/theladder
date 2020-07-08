@@ -1,5 +1,4 @@
 import React from "react";
-// import ReactDOM from 'react-dom';
 import "@atlaskit/css-reset";
 import { DragDropContext } from "react-beautiful-dnd";
 import arrayMove from "array-move";
@@ -7,7 +6,6 @@ import DroppablePlayerList from "./DroppablePlayerList";
 
 const PlayerList = (props) => {
   const onDragEnd = (result) => {
-    // dropped outside the list
     const { destination, source } = result;
 
     if (!destination) {

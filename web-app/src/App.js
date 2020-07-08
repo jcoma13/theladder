@@ -2,8 +2,6 @@ import React from "react";
 import "./App.css";
 import Heading from "./components/Heading";
 import PlayerList from "./components/PlayerList";
-import playerData from "./data/players.json";
-
 import AddButton from "./components/AddButton";
 import { getPlayerData } from "./utils/helpers";
 
@@ -20,49 +18,36 @@ class App extends React.Component {
   }
 
   async init() {
+
+    function compare(a, b) {
+      const rankA = a.rank;
+      const rankB = b.rank;
+
+      let comparison = 0;
+      if (rankA > rankB) {
+        comparison = 1;
+      } else if (rankA < rankB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+
     const players = await getPlayerData();
     const formattedPlayers = players.map((player) => {
-      /**
-       * 
-       * 
-       * 
-INPUT:
-{
-  "attributes": {
-    "Rank": 1,
-    "Name": "Jansen",
-    "Handedness": "Right",
-    "Backhand": "2-Handed",
-    "Wins": 1,
-    "Losses": 0,
-    "Feet": 6,
-    "Inches": 1,
-    "Latitude": 34.0556,
-    "Longitude": -117.1825,
-    "ObjectId": 2
-  }
-}
-
-Desired Output:
-{
-  "id": 1,
-  "name": "Jansen",
-  "feet": 6,
-  "inches": 1,
-  "plays": "right-handed",
-  "backhand": "two-handed",
-  "wins": 15,
-  "losses": 6
-},
-       * 
-       * 
-       */
-      //TODO - reformat players data and set state.
-      console.log(player);
+      var newPlayer =  
+          {rank: player.attributes.Rank,
+          id: player.attributes.ObjectId,
+          name: player.attributes.Name,
+          plays: player.attributes.Handedness,
+          backhand: player.attributes.Backhand, 
+          wins: player.attributes.Wins,
+          losses: player.attributes.Losses, 
+          feet: player.attributes.Feet, 
+          inches: player.attributes.Inches}
+      return newPlayer;
     });
-
-    //when done set state
-    // this.setState({ players: formattedPlayers });
+    formattedPlayers.sort(compare);
+    this.setState({ players: formattedPlayers });
   }
 
   handlePlayerAdd = (player) => {
@@ -88,15 +73,11 @@ Desired Output:
   };
 
   handlePlayerUpdated = (player) => {
-    // loop over players, check if ids are the same with updated player and old
-    // player then replace old player, otherwise don't swap
     this.props.onPlayerAdd(player);
     this.closeModal();
   };
 
-  //talk to server functions
   render() {
-    // const docsModalZIndex = { zIndex: 1001 };
     return (
       <div className="Heading">
         <Heading />

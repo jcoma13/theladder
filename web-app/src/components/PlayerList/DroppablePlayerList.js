@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
-// import Player from './player';
 import PlayerCard from "../PlayerCard/PlayerCard";
 
 const Container = styled.div`
@@ -20,7 +19,7 @@ const PList = styled.div`
 
 export default class DroppablePlayerList extends React.Component {
   render() {
-    console.log(this.props.players.map((player) => player.id));
+    // console.log(this.props.players.map((player) => player.id));
     return (
       <Container style={{ maxWidth: "375px", textAlign: "center", padding: 0 }}>
         <Title>{this.props.title}</Title>
@@ -29,7 +28,6 @@ export default class DroppablePlayerList extends React.Component {
             <PList ref={provided.innerRef} {...provided.droppableProps}>
               {this.props.players.map((player, index) => (
                 <PlayerCard key={player.id} player={player} index={index} />
-                // <Player key={player.id} player={player} index={index}/>
               ))}
               {provided.placeholder}
             </PList>
