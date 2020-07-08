@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
 import Heading from "./components/Heading";
-import PlayerList from "./components/PlayerList/PlayerList";
+// import PlayerList from "./components/PlayerList/PlayerList";
+import PlayerList2 from "./components/PlayerList2/PlayerList2";
 import playerData from "./data/players.json";
-import Button from "calcite-react/Button";
-import Modal from "calcite-react/Modal";
-import PlayerCard from "./components/PlayerCard/PlayerCard";
-import {getNewPlayer} from "./utils/helpers";
+// import initialData from './components/PlayerList2/initial-data';
+// import Button from "calcite-react/Button";
+// import Modal from "calcite-react/Modal";
+// import PlayerCard from "./components/PlayerCard/PlayerCard";
+// import {getNewPlayer} from "./utils/helpers";
 import AddButton from "./components/AddButton";
 
 class App extends React.Component {
@@ -50,7 +52,7 @@ class App extends React.Component {
 
   //talk to server functions
   render() {
-    const docsModalZIndex = { zIndex: 1001 };
+    // const docsModalZIndex = { zIndex: 1001 };
     return (
       <div className='Heading'>
         <Heading />
@@ -58,39 +60,21 @@ class App extends React.Component {
             display: "flex",
             justifyContent: "center",
             alignItems: "center"
-          }}>
-        <Button onClick={this.openModal}>Add Rung</Button>
-        <Modal
-          open={this.state.open}
-          onRequestClose={this.closeModal}
-          appElement={document.body}
-          overlayStyle={docsModalZIndex}
-          title="New Player"
-          secondaryActions={
-            <Button
-              key="cancel"
-              onClick={this.closeModal}
-              clearGray
-              iconPosition="before"
-            >
-              Cancel
-            </Button>
-          }
-        >
-          <PlayerCard
-            player={getNewPlayer(this.state.players.length)}
-            mode="editable"
-            onPlayerUpdate={this.handlePlayerUpdated}
+        }}>
+          <AddButton 
+            newPlayerId={this.state.players.length} 
+            onPlayerAdd={this.handlePlayerAdd}
           />
-        </Modal>
         </div>
         <div className='List' style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
         }}>
-          <PlayerList players={this.state.players} 
-          onOrderChange={this.onPlayerListOrderChange}/>
+          <PlayerList2 
+            players={this.state.players} 
+            onOrderChange={this.onPlayerListOrderChange}
+          />
         </div>
       </div>
     );

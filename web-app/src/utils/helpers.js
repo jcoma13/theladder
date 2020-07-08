@@ -1,6 +1,6 @@
-export function getNewPlayer(id) {
+export function getNewPlayer(newId) {
   return {
-    id: id,
+    id: newId,
     name: "",
     feet: null,
     inches: null,

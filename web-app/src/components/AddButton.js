@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "calcite-react/Button";
-import Modal from "calcite-react/Modal";
+// import Modal from "calcite-react/Modal";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import PropTypes from "prop-types";
 import {getNewPlayer} from "../utils/helpers";
@@ -32,12 +32,12 @@ class AddButton extends React.Component {
   };
 
   render() {
-    const docsModalZIndex = { zIndex: 1001 };
+    // const docsModalZIndex = { zIndex: 1001 };
 
     return (
       <div>
         <Button onClick={this.openModal}>Add Rung</Button>
-        <Modal
+        {/* <Modal
           open={this.state.open}
           onRequestClose={this.closeModal}
           appElement={document.body}
@@ -53,13 +53,16 @@ class AddButton extends React.Component {
               Cancel
             </Button>
           }
-        >
-          <PlayerCard
-            player={getNewPlayer(this.state.players.length)}
-            mode="editable"
-            onPlayerAdd={this.handlePlayerAdd}
-          />
-        </Modal>
+        > */}
+        {this.state.open && (<PlayerCard
+              player={getNewPlayer(this.props.newPlayerId)}
+              mode="editable"
+              onPlayerUpdated={this.handlePlayerUpdated}
+              isModal={true}
+              onPlayerUpdateCancel={this.closeModal}
+              // onNewPlayer={this.handlePlayerAdd} 
+              />)}
+        {/* // </Modal> */}
       </div>
     );
   }
