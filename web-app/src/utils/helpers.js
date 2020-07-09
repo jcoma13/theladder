@@ -33,7 +33,7 @@ export async function getPlayerData() {
 
 export async function updatePlayer(player) {
   try {
-    //TODO : review https://developers.arcgis.com/rest/services-reference/apply-edits-feature-service-.htm
+    // TODO : review https://developers.arcgis.com/rest/services-reference/apply-edits-feature-service-.htm
     /**
      * look at updates array
      * Maybe needs to be a POST (search 'JavaScript Post Fetch API')

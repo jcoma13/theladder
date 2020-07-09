@@ -22,7 +22,7 @@ class App extends React.Component {
     function compare(a, b) {
       const rankA = a.rank;
       const rankB = b.rank;
-
+      
       let comparison = 0;
       if (rankA > rankB) {
         comparison = 1;
@@ -35,15 +35,15 @@ class App extends React.Component {
     const players = await getPlayerData();
     const formattedPlayers = players.map((player) => {
       var newPlayer =  
-          {rank: player.attributes.Rank,
-          id: player.attributes.ObjectId,
-          name: player.attributes.Name,
-          plays: player.attributes.Handedness,
-          backhand: player.attributes.Backhand, 
-          wins: player.attributes.Wins,
-          losses: player.attributes.Losses, 
-          feet: player.attributes.Feet, 
-          inches: player.attributes.Inches}
+        {rank: player.attributes.Rank,
+        id: player.attributes.ObjectId,
+        name: player.attributes.Name,
+        plays: player.attributes.Handedness,
+        backhand: player.attributes.Backhand, 
+        wins: player.attributes.Wins,
+        losses: player.attributes.Losses, 
+        feet: player.attributes.Feet, 
+        inches: player.attributes.Inches}
       return newPlayer;
     });
     formattedPlayers.sort(compare);
