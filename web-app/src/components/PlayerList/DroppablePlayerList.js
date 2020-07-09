@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
 import PlayerCard from "../PlayerCard/PlayerCard";
-
+import { updatePlayers } from "../../utils/helpers";
 const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
@@ -27,7 +27,14 @@ export default class DroppablePlayerList extends React.Component {
           {(provided) => (
             <PList ref={provided.innerRef} {...provided.droppableProps}>
               {this.props.players.map((player, index) => (
-                <PlayerCard key={player.id} player={player} index={index} />
+                <PlayerCard
+                  key={player.id}
+                  player={player}
+                  index={index}
+                  onPlayerUpdated={(player) => {
+                    updatePlayers([player]);
+                  }}
+                />
               ))}
               {provided.placeholder}
             </PList>
