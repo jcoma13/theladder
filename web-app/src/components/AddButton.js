@@ -2,7 +2,7 @@ import React from "react";
 import Button from "calcite-react/Button";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import PropTypes from "prop-types";
-import {getNewPlayer} from "../utils/helpers";
+import { getNewPlayer } from "../utils/helpers";
 
 class AddButton extends React.Component {
   constructor(props) {

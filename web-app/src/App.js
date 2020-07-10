@@ -3,7 +3,7 @@ import "./App.css";
 import Heading from "./components/Heading";
 import PlayerList from "./components/PlayerList";
 import AddButton from "./components/AddButton";
-import { getPlayerData, updatePlayers } from "./utils/helpers";
+import { getPlayerData, updatePlayers, addPlayer } from "./utils/helpers";
 
 class App extends React.Component {
   constructor(props) {
@@ -53,9 +53,11 @@ class App extends React.Component {
   }
 
   handlePlayerAdd = (player) => {
+    player.rank = this.state.players.length + 1;
     let playersCopy = [...this.state.players];
     playersCopy.push(player);
     this.setState({ players: playersCopy });
+    addPlayer(player);
   };
 
   onPlayerListOrderChange = (sortedPlayers) => {

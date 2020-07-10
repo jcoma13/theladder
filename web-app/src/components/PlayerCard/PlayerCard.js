@@ -12,6 +12,7 @@ import { Move } from "react-bytesize-icons";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import DeleteButton from '../DeleteButton';
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -127,6 +128,14 @@ class PlayerCard extends Component {
           }}
         >
           <Move width={12} height={12} />
+        </div>
+        <div
+          style={{
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <DeleteButton/>
         </div>
         <CardContent style={{ margin: -8 }}>
           <CardTitle>
