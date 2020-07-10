@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "calcite-react/Button";
-import TrashIcon from 'calcite-ui-icons-react/TrashIcon';
+import TrashIcon from "calcite-ui-icons-react/TrashIcon";
 import Modal from "calcite-react/Modal";
 
 class DeleteButton extends React.Component {
@@ -23,9 +23,14 @@ class DeleteButton extends React.Component {
     });
   };
 
+  handleDelete = () => {
+    this.props.confirmDelete();
+    this.closeModal();
+  };
+
   render() {
     const docsModalZIndex = { zIndex: 1001 };
-    
+
     return (
       <div>
         <Button
@@ -34,37 +39,38 @@ class DeleteButton extends React.Component {
           onClick={this.openModal}
         />
         <Modal
-        open={this.state.open}
-        onRequestClose={this.closeModal}
-        appElement={document.body}
-        overlayStyle={docsModalZIndex}
-        secondaryActions={[
-          <div 
-            style={{
-              display: 'flex', 
-              justifyContent: 'center' 
-          }}>
-            <Button
-              key="cancel"
-              onClick={this.closeModal}
-              clearGray
-              iconPosition="before"
+          open={this.state.open}
+          onRequestClose={this.closeModal}
+          appElement={document.body}
+          overlayStyle={docsModalZIndex}
+          secondaryActions={[
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              Cancel
-            </Button>
-            <Button
-              key="yes"
-              onClick={this.closeModal}
-              blue
-              iconPosition="before"
-            >
-              Confirm
-            </Button>
-          </div>
-        ]}
-      >
-        Are you sure you would like to delete this player card?
-      </Modal>
+              <Button
+                key="cancel"
+                onClick={this.closeModal}
+                clearGray
+                iconPosition="before"
+              >
+                Cancel
+              </Button>
+              <Button
+                key="yes"
+                onClick={this.handleDelete}
+                blue
+                iconPosition="before"
+              >
+                Confirm
+              </Button>
+            </div>,
+          ]}
+        >
+          Are you sure you would like to delete this player card?
+        </Modal>
       </div>
     );
   }

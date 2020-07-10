@@ -12,7 +12,7 @@ import { Move } from "react-bytesize-icons";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import DeleteButton from '../DeleteButton';
+import DeleteButton from "../DeleteButton";
 
 class PlayerCard extends Component {
   constructor(props) {
@@ -76,6 +76,10 @@ class PlayerCard extends Component {
     });
   };
 
+  handleDelete = () => {
+    this.props.onPlayerDelete(this.state.playerId);
+  };
+
   getReadOnlyCard() {
     const { name, plays, backhand, wins, losses, feet, inches } = this.state;
     var height;
@@ -131,11 +135,11 @@ class PlayerCard extends Component {
         </div>
         <div
           style={{
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-          >
-            <DeleteButton/>
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
+        >
+          <DeleteButton confirmDelete={this.handleDelete} />
         </div>
         <CardContent style={{ margin: -8 }}>
           <CardTitle>

@@ -52,6 +52,16 @@ class App extends React.Component {
     this.setState({ players: formattedPlayers });
   }
 
+  handlePlayerDelete = (playerId) => {
+    var newPL = this.state.players.filter((item) => {
+      return item.id === playerId;
+    });
+
+    //TODO: CALL METHOD TO DELETE FROM SERVER
+
+    this.setState({ players: newPL });
+  };
+
   handlePlayerAdd = (player) => {
     player.rank = this.state.players.length + 1;
     let playersCopy = [...this.state.players];
@@ -116,6 +126,7 @@ class App extends React.Component {
           <PlayerList
             players={this.state.players}
             onOrderChange={this.onPlayerListOrderChange}
+            onPlayerDelete={this.handlePlayerDelete}
           />
         </div>
       </div>

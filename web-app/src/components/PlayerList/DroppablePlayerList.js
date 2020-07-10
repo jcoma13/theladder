@@ -32,8 +32,9 @@ export default class DroppablePlayerList extends React.Component {
                   player={player}
                   index={index}
                   onPlayerUpdated={(player) => {
-                    updatePlayers([player]);}
-                  }
+                    updatePlayers([player]);
+                  }}
+                  onPlayerDelete={this.props.onPlayerDelete}
                 />
               ))}
               {provided.placeholder}
