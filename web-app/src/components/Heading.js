@@ -1,21 +1,36 @@
 import React from "react";
+import styled from "styled-components";
 
 const Heading = props => {
+
+  const Title = styled.h1`
+  font-size: 4.3em;
+  padding: 8px;
+  text-align: center;
+`;
+
+  const Description = styled.h4`
+  font-size: 1.3em;
+  text-align: center;
+`;
+
+  const Container = styled.div`
+  margin: 8px;
+`;
+
+var text = "Enter text into the boxes.\nDrag and drop the boxes to re-order the ladder.\n Click the 'Add Rung' button to add more slots on your ladder.\n"
+
   return (
-    <div className="top">
-      <div className="header">
-        <h1 className="title">The Ladder</h1>
-      </div>
-      <div className="description">
-        <h4 className="instructions">Enter text into the boxes.</h4>
-        <h4 className="drag">
-          Drag and drop the boxes to re-order the ladder.
-        </h4>
-        <h4 className="rung">
-          Click the "Add Rung" button to add more slots on your ladder.
-        </h4>
-      </div>
-    </div>
+    <Container>
+      <Title>
+        The Ladder
+      </Title>
+      <Description>
+        {text.split("\n").map((i,key) => {
+              return <div key={key}>{i}</div>;
+          })}
+      </Description>
+    </Container>
   );
 };
 

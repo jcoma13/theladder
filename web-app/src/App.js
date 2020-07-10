@@ -4,6 +4,8 @@ import Heading from "./components/Heading";
 import PlayerList from "./components/PlayerList";
 import AddButton from "./components/AddButton";
 import { getPlayerData, updatePlayers, addPlayer, deletePlayer } from "./utils/helpers";
+import styled from "styled-components";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -95,7 +97,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="Heading">
+        <div className="Heading">
         <Heading />
         <div
           className="AddButton"

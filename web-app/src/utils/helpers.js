@@ -1,4 +1,6 @@
-import { applyEdits , addFeatures, deleteFeatures } from "@esri/arcgis-rest-feature-layer";
+import { applyEdits , 
+  addFeatures, 
+  deleteFeatures } from "@esri/arcgis-rest-feature-layer";
 
 export function getNewPlayer(newId) {
   return {
