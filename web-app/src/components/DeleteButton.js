@@ -45,6 +45,7 @@ class DeleteButton extends React.Component {
           overlayStyle={docsModalZIndex}
           secondaryActions={[
             <div
+            key={"buttons"}
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -75,13 +76,5 @@ class DeleteButton extends React.Component {
     );
   }
 }
-
-// AddButton.propTypes = {
-//   onPlayerAdd: PropTypes.func,
-// };
-
-// AddButton.defaultProps = {
-//   onPlayerAdd: () => {},
-// };
 
 export default DeleteButton;

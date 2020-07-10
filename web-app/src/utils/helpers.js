@@ -1,4 +1,4 @@
-import { applyEdits , addFeatures } from "@esri/arcgis-rest-feature-layer";
+import { applyEdits , addFeatures, deleteFeatures } from "@esri/arcgis-rest-feature-layer";
 
 export function getNewPlayer(newId) {
   return {
@@ -85,6 +85,18 @@ export async function addPlayer(player) {
         newPlayer,
       ],
     });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function deletePlayer(playerId) {
+  try {
+    deleteFeatures({
+      url: 
+        "https://services1.arcgis.com/dOFzdrPdRgtU4fRo/ArcGIS/rest/services/Players/FeatureServer/0",
+      objectIds: [playerId]
+    })
   } catch (e) {
     console.error(e);
   }

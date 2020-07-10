@@ -3,7 +3,7 @@ import "./App.css";
 import Heading from "./components/Heading";
 import PlayerList from "./components/PlayerList";
 import AddButton from "./components/AddButton";
-import { getPlayerData, updatePlayers, addPlayer } from "./utils/helpers";
+import { getPlayerData, updatePlayers, addPlayer, deletePlayer } from "./utils/helpers";
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,6 @@ class App extends React.Component {
 
     const players = await getPlayerData();
     const formattedPlayers = players.map((player) => {
-      console.log(player);
 
       var newPlayer = {
         rank: player.attributes.Rank,
@@ -54,12 +53,10 @@ class App extends React.Component {
 
   handlePlayerDelete = (playerId) => {
     var newPL = this.state.players.filter((item) => {
-      return item.id === playerId;
+      return item.id !== playerId;
     });
-
-    //TODO: CALL METHOD TO DELETE FROM SERVER
-
     this.setState({ players: newPL });
+    deletePlayer(playerId);
   };
 
   handlePlayerAdd = (player) => {
@@ -71,13 +68,11 @@ class App extends React.Component {
   };
 
   onPlayerListOrderChange = (sortedPlayers) => {
-    //loop over players in sorted Players array and reset rank based on order in array
     const rankedPlayers = sortedPlayers.map((player, index) => {
       player.rank = index + 1;
       return player;
     });
     updatePlayers(rankedPlayers);
-
     this.setState({ players: rankedPlayers });
   };
 

@@ -19,7 +19,6 @@ const PList = styled.div`
 
 export default class DroppablePlayerList extends React.Component {
   render() {
-    // console.log(this.props.players.map((player) => player.id));
     return (
       <Container style={{ maxWidth: "375px", textAlign: "center", padding: 0 }}>
         <Title>{this.props.title}</Title>
