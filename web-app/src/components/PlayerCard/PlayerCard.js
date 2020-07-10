@@ -64,6 +64,10 @@ class PlayerCard extends Component {
     this.setState({ losses: event.target.value });
   };
 
+  handleDelete = () => {
+    this.props.onPlayerDelete(this.state.playerId);
+  };
+
   openModal = () => {
     this.setState({
       open: true,
@@ -74,10 +78,6 @@ class PlayerCard extends Component {
     this.setState({
       open: false,
     });
-  };
-
-  handleDelete = () => {
-    this.props.onPlayerDelete(this.state.playerId);
   };
 
   getReadOnlyCard() {
