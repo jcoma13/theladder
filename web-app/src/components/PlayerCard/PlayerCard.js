@@ -24,6 +24,10 @@ const PlayerCard = ({ player, onPlayerUpdated, onPlayerDelete, index }) => {
     onPlayerDelete(player.id);
   };
 
+  // const handlePlayerUpdate = () => {
+  //   onPlayerUpdated();
+  // };
+
   const openModal = () => {
     setMode("editable");
   };
