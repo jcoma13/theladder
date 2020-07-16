@@ -17,14 +17,7 @@ const Container = styled.div`
   background-color: white;
 `;
 
-const PlayerCard = ({
-  player,
-  onPlayerUpdated,
-  onPlayerDelete,
-  index,
-  ...props
-}) => {
-  // const [player, setPlayer] = useState(props.player);
+const PlayerCard = ({ player, onPlayerUpdated, onPlayerDelete, index }) => {
   const [mode, setMode] = useState("readOnly");
 
   const handleDelete = () => {
@@ -38,30 +31,6 @@ const PlayerCard = ({
   const closeModal = () => {
     setMode("readOnly");
   };
-
-  //   return (
-  //     <Modal
-  //       open={true}
-  //       onRequestClose={closeModal}
-  //       appElement={document.body}
-  //       overlayStyle={docsModalZIndex}
-  //       secondaryActions={
-  //         <Button
-  //           key="cancel"
-  //           onClick={() => {
-  //             setMode("readOnly");
-  //           }}
-  //           clearGray
-  //           iconPosition="before"
-  //         >
-  //           Cancel
-  //         </Button>
-  //       }
-  //     >
-  //       {cardInfo}
-  //     </Modal>
-  //   );
-  // };
 
   const { name, plays, backhand, wins, losses, feet, inches } = player;
   var height;

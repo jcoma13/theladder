@@ -1,4 +1,3 @@
-// Framework and third-party non-ui
 import React, { useState } from "react";
 import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
@@ -165,9 +164,5 @@ const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
     </Modal>
   );
 };
-
-EditablePlayerCard.propTypes = {};
-
-EditablePlayerCard.defaultProps = {};
 
 export default EditablePlayerCard;

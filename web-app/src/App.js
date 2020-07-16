@@ -11,19 +11,7 @@ import {
 } from "./utils/helpers";
 
 const App = () => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     players: [
-  //       /* no data.. empty array */
-  //     ],
-  //     open: false,
-  //   };
-  //   this.init();
-  // }
-
   const [players, setPlayers] = useState([]);
-  // const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     function compare(a, b) {
@@ -63,40 +51,6 @@ const App = () => {
     };
     _getPlayerData();
   }, []);
-
-  // async init() {
-  //   function compare(a, b) {
-  //     const rankA = a.rank;
-  //     const rankB = b.rank;
-
-  //     let comparison = 0;
-  //     if (rankA > rankB) {
-  //       comparison = 1;
-  //     } else if (rankA < rankB) {
-  //       comparison = -1;
-  //     }
-  //     return comparison;
-  //   }
-
-  //   const players = await getPlayerData();
-  //   const formattedPlayers = players.map((player) => {
-
-  //     var newPlayer = {
-  //       rank: player.attributes.Rank,
-  //       id: player.attributes.ObjectId,
-  //       name: player.attributes.Name,
-  //       plays: player.attributes.Handedness,
-  //       backhand: player.attributes.Backhand,
-  //       wins: player.attributes.Wins,
-  //       losses: player.attributes.Losses,
-  //       feet: player.attributes.Feet,
-  //       inches: player.attributes.Inches,
-  //     };
-  //     return newPlayer;
-  //   });
-  //   formattedPlayers.sort(compare);
-  //   this.setState({ players: formattedPlayers });
-  // }
 
   const handlePlayerDelete = (playerId) => {
     var updatedPlayers = players.filter((item) => {
