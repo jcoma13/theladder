@@ -1,17 +1,19 @@
-import { applyEdits , 
-  addFeatures, 
-  deleteFeatures } from "@esri/arcgis-rest-feature-layer";
+import {
+  applyEdits,
+  addFeatures,
+  deleteFeatures,
+} from "@esri/arcgis-rest-feature-layer";
 
 export function getNewPlayer(newId) {
   return {
     id: newId,
     name: "",
-    feet: null,
-    inches: null,
+    feet: 0,
+    inches: 0,
     plays: "",
     backhand: "",
-    wins: null,
-    losses: null,
+    wins: 0,
+    losses: 0,
     mode: "editable",
   };
 }
@@ -66,26 +68,24 @@ export async function updatePlayers(players) {
 export async function addPlayer(player) {
   try {
     const newPlayer = {
-        geometry: {x: -117.1825, y: 34.0556},
-        attributes: {
-          ObjectId: player.id,
-          Rank: player.rank,
-          Handedness: player.plays,
-          Name: player.name,
-          Backhand: player.backhand,
-          Wins: player.wins,
-          Losses: player.losses,
-          Feet: player.feet,
-          Inches: player.inches,
-        },
-      };
+      geometry: { x: -117.1825, y: 34.0556 },
+      attributes: {
+        ObjectId: player.id,
+        Rank: player.rank,
+        Handedness: player.plays,
+        Name: player.name,
+        Backhand: player.backhand,
+        Wins: player.wins,
+        Losses: player.losses,
+        Feet: player.feet,
+        Inches: player.inches,
+      },
+    };
 
     addFeatures({
-      url: 
+      url:
         "https://services1.arcgis.com/dOFzdrPdRgtU4fRo/ArcGIS/rest/services/Players/FeatureServer/0",
-      features: [
-        newPlayer,
-      ],
+      features: [newPlayer],
     });
   } catch (e) {
     console.error(e);
@@ -95,10 +95,10 @@ export async function addPlayer(player) {
 export async function deletePlayer(playerId) {
   try {
     deleteFeatures({
-      url: 
+      url:
         "https://services1.arcgis.com/dOFzdrPdRgtU4fRo/ArcGIS/rest/services/Players/FeatureServer/0",
-      objectIds: [playerId]
-    })
+      objectIds: [playerId],
+    });
   } catch (e) {
     console.error(e);
   }

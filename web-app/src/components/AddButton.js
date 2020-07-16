@@ -1,49 +1,34 @@
 import React from "react";
 import Button from "calcite-react/Button";
-import PlayerCard from "./PlayerCard/PlayerCard";
 import PropTypes from "prop-types";
 import { getNewPlayer } from "../utils/helpers";
+import { useState } from "react";
+import EditablePlayerCard from "./PlayerCard/EditablePlayerCard";
 
-class AddButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+const AddButton = ({ newPlayerId, onPlayerAdd }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  openModal = () => {
-    this.setState({
-      open: true,
-    });
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
-  closeModal = () => {
-    this.setState({
-      open: false,
-    });
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
-  handlePlayerUpdated = player => {
-    this.props.onPlayerAdd(player);
-    this.closeModal();
-  };
-
-  render() {
-    return (
-      <div>
-        <Button onClick={this.openModal}>Add Rung</Button>
-        {this.state.open && (<PlayerCard
-              player={getNewPlayer(this.props.newPlayerId)}
-              mode="editable"
-              onPlayerUpdated={this.handlePlayerUpdated}
-              isModal={true}
-              onPlayerUpdateCancel={this.closeModal}
-              />)}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Button onClick={openModal}>Add Rung</Button>
+      {isModalOpen && (
+        <EditablePlayerCard
+          player={getNewPlayer(newPlayerId)}
+          onCloseModal={closeModal}
+          onConfirm={onPlayerAdd}
+        />
+      )}
+    </div>
+  );
+};
 
 AddButton.propTypes = {
   onPlayerAdd: PropTypes.func,
