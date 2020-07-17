@@ -35,6 +35,7 @@ const PlayerList = (props) => {
         columnId="playerList"
         players={props.players}
         onPlayerDelete={props.onPlayerDelete}
+        onPlayerUpdated={props.onPlayerUpdated}
       />
     </DragDropContext>
   );

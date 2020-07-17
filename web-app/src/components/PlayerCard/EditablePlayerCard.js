@@ -15,11 +15,11 @@ const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
   };
 
   const updateFeetSliderValue = (event) => {
-    setPlayer({ ...player, feet: parseInt(event.target.value, 10) });
+    setPlayer({ ...player, feet: event.target.valueAsNumber });
   };
 
   const updateInchesSliderValue = (event) => {
-    setPlayer({ ...player, inches: parseInt(event.target.value, 10) });
+    setPlayer({ ...player, inches: event.target.valueAsNumber });
   };
 
   const handlePlaysSelectChange = (value) => {
@@ -31,11 +31,11 @@ const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
   };
 
   const handleWinsSelectChange = (event) => {
-    setPlayer({ ...player, wins: event.target.value });
+    setPlayer({ ...player, wins: event.target.valueAsNumber });
   };
 
   const handleLossesSelectChange = (event) => {
-    setPlayer({ ...player, losses: event.target.value });
+    setPlayer({ ...player, losses: event.target.valueAsNumber });
   };
 
   const docsModalZIndex = {
@@ -130,31 +130,14 @@ const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
         {/* losses */} <div> # of losses: </div>
         <TextField
           placeholder="ex: 5"
+          type="number"
           value={player.losses}
           onChange={handleLossesSelectChange}
         />
         {/* button to switch state */}
         <Button
           onClick={() => {
-            const {
-              name,
-              plays,
-              backhand,
-              wins,
-              losses,
-              feet,
-              inches,
-            } = player;
-            onConfirm({
-              id: player.id,
-              name,
-              plays,
-              backhand,
-              wins,
-              losses,
-              feet,
-              inches,
-            });
+            onConfirm(player);
             onCloseModal();
           }}
         >

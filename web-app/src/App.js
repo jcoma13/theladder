@@ -68,6 +68,15 @@ const App = () => {
     addPlayer(player);
   };
 
+  const handlePlayerUpdate = async (player) => {
+    const rankedPlayers = [...players];
+    rankedPlayers[player.rank - 1] = player;
+    const updateSuccessful = await updatePlayers([player]);
+    if (updateSuccessful) {
+      setPlayers(rankedPlayers);
+    }
+  };
+
   const onPlayerListOrderChange = (sortedPlayers) => {
     const rankedPlayers = sortedPlayers.map((player, index) => {
       player.rank = index + 1;
@@ -105,6 +114,7 @@ const App = () => {
           players={players}
           onOrderChange={onPlayerListOrderChange}
           onPlayerDelete={handlePlayerDelete}
+          onPlayerUpdated={handlePlayerUpdate}
         />
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
 import PlayerCard from "../PlayerCard/PlayerCard";
-import { updatePlayers } from "../../utils/helpers";
+// import { updatePlayers } from "../../utils/helpers";
 
 const Container = styled.div`
   margin: 8px;
@@ -31,9 +31,7 @@ export default class DroppablePlayerList extends React.Component {
                   key={player.id}
                   player={player}
                   index={index}
-                  onPlayerUpdated={(player) => {
-                    updatePlayers([player]);
-                  }}
+                  onPlayerUpdated={this.props.onPlayerUpdated}
                   onPlayerDelete={this.props.onPlayerDelete}
                 />
               ))}

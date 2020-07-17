@@ -55,11 +55,12 @@ export async function updatePlayers(players) {
       };
     });
 
-    applyEdits({
+    const updateSuccessful = await applyEdits({
       url:
         "https://services1.arcgis.com/dOFzdrPdRgtU4fRo/ArcGIS/rest/services/Players/FeatureServer/0",
       updates: JSON.stringify(updatedPlayers),
     });
+    return updateSuccessful;
   } catch (e) {
     console.error(e);
   }
