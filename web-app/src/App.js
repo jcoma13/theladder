@@ -10,6 +10,16 @@ import {
   deletePlayer,
 } from "./utils/helpers";
 
+const PlayerContext = React.createContext({
+  players: undefined,
+  handlePlayerDelete: undefined,
+  handlePlayerAdd: undefined,
+  handlePlayerUpdate: undefined,
+  onPlayerListOrderChange: undefined,
+});
+
+PlayerContext.displayName = "PlayerContext";
+
 const App = () => {
   const [players, setPlayers] = useState([]);
 
@@ -87,38 +97,44 @@ const App = () => {
   };
 
   return (
-    <div className="Heading">
-      <Heading />
-      <div
-        className="AddButton"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <AddButton
-          newPlayerId={players.length + 1}
-          onPlayerAdd={handlePlayerAdd}
-        />
+    <PlayerContext.Provider
+      value={{
+        players,
+        handlePlayerAdd,
+        handlePlayerDelete,
+        handlePlayerUpdate,
+        onPlayerListOrderChange,
+      }}
+    >
+      <div className="Heading">
+        <Heading />
+        <div
+          className="AddButton"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <AddButton
+            newPlayerId={players.length + 1}
+            onPlayerAdd={handlePlayerAdd}
+          />
+        </div>
+        <div
+          className="List"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <PlayerList players={players} />
+        </div>
       </div>
-      <div
-        className="List"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <PlayerList
-          players={players}
-          onOrderChange={onPlayerListOrderChange}
-          onPlayerDelete={handlePlayerDelete}
-          onPlayerUpdated={handlePlayerUpdate}
-        />
-      </div>
-    </div>
+    </PlayerContext.Provider>
   );
 };
 
-export default App;
+// export default App;
+export { App as default, PlayerContext };

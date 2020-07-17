@@ -2,6 +2,7 @@ import React from "react";
 import Button from "calcite-react/Button";
 import TrashIcon from "calcite-ui-icons-react/TrashIcon";
 import Modal from "calcite-react/Modal";
+import { PlayerContext } from "../App";
 
 class DeleteButton extends React.Component {
   constructor(props) {
@@ -23,8 +24,8 @@ class DeleteButton extends React.Component {
     });
   };
 
-  handleDelete = () => {
-    this.props.confirmDelete();
+  handleDelete = (playerContext) => {
+    playerContext.handlePlayerDelete(this.props.playerId);
     this.closeModal();
   };
 
@@ -32,47 +33,51 @@ class DeleteButton extends React.Component {
     const docsModalZIndex = { zIndex: 1001 };
 
     return (
-      <div>
-        <Button
-          iconButton
-          icon={<TrashIcon size={14} />}
-          onClick={this.openModal}
-        />
-        <Modal
-          open={this.state.open}
-          onRequestClose={this.closeModal}
-          appElement={document.body}
-          overlayStyle={docsModalZIndex}
-          secondaryActions={[
-            <div
-            key={"buttons"}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
+      <PlayerContext.Consumer>
+        {(playerContext) => (
+          <div>
+            <Button
+              iconButton
+              icon={<TrashIcon size={14} />}
+              onClick={this.openModal}
+            />
+            <Modal
+              open={this.state.open}
+              onRequestClose={this.closeModal}
+              appElement={document.body}
+              overlayStyle={docsModalZIndex}
+              secondaryActions={[
+                <div
+                  key={"buttons"}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    key="cancel"
+                    onClick={this.closeModal}
+                    clearGray
+                    iconPosition="before"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    key="yes"
+                    onClick={() => this.handleDelete(playerContext)}
+                    blue
+                    iconPosition="before"
+                  >
+                    Confirm
+                  </Button>
+                </div>,
+              ]}
             >
-              <Button
-                key="cancel"
-                onClick={this.closeModal}
-                clearGray
-                iconPosition="before"
-              >
-                Cancel
-              </Button>
-              <Button
-                key="yes"
-                onClick={this.handleDelete}
-                blue
-                iconPosition="before"
-              >
-                Confirm
-              </Button>
-            </div>,
-          ]}
-        >
-          Are you sure you would like to delete this player card?
-        </Modal>
-      </div>
+              Are you sure you would like to delete this player card?
+            </Modal>
+          </div>
+        )}
+      </PlayerContext.Consumer>
     );
   }
 }

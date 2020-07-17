@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "calcite-react/Button";
 import Modal from "calcite-react/Modal";
 import TextField from "calcite-react/TextField";
@@ -6,9 +6,11 @@ import Select from "calcite-react/Select";
 import Slider from "calcite-react/Slider";
 import MenuItem from "calcite-react/Menu";
 import Form, { FormControl } from "calcite-react/Form";
+import { PlayerContext } from "../../App";
 
-const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
+const EditablePlayerCard = ({ onCloseModal, mode, ...props }) => {
   const [player, setPlayer] = useState(props.player);
+  const playerContext = useContext(PlayerContext);
 
   const updateName = (event) => {
     setPlayer({ ...player, name: event.target.value });
@@ -137,7 +139,11 @@ const EditablePlayerCard = ({ onCloseModal, onConfirm, ...props }) => {
         {/* button to switch state */}
         <Button
           onClick={() => {
-            onConfirm(player);
+            if (mode === "update") {
+              playerContext.handlePlayerUpdate(player);
+            } else {
+              playerContext.handlePlayerAdd(player);
+            }
             onCloseModal();
           }}
         >

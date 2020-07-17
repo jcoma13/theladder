@@ -17,12 +17,8 @@ const Container = styled.div`
   background-color: white;
 `;
 
-const PlayerCard = ({ player, onPlayerUpdated, onPlayerDelete, index }) => {
+const PlayerCard = ({ player, index }) => {
   const [mode, setMode] = useState("readOnly");
-
-  const handleDelete = () => {
-    onPlayerDelete(player.id);
-  };
 
   const openModal = () => {
     setMode("editable");
@@ -90,7 +86,7 @@ const PlayerCard = ({ player, onPlayerUpdated, onPlayerDelete, index }) => {
                   justifyContent: "flex-start",
                 }}
               >
-                <DeleteButton confirmDelete={handleDelete} />
+                <DeleteButton playerId={player.id} />
               </div>
               <CardContent style={{ margin: -8 }}>
                 <CardTitle>
@@ -111,8 +107,8 @@ const PlayerCard = ({ player, onPlayerUpdated, onPlayerDelete, index }) => {
       {mode === "editable" ? (
         <EditablePlayerCard
           player={player}
+          mode="update"
           onCloseModal={closeModal}
-          onConfirm={onPlayerUpdated}
         />
       ) : null}
     </>

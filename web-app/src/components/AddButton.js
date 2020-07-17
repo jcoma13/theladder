@@ -5,7 +5,7 @@ import { getNewPlayer } from "../utils/helpers";
 import { useState } from "react";
 import EditablePlayerCard from "./PlayerCard/EditablePlayerCard";
 
-const AddButton = ({ newPlayerId, onPlayerAdd }) => {
+const AddButton = ({ newPlayerId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -22,8 +22,8 @@ const AddButton = ({ newPlayerId, onPlayerAdd }) => {
       {isModalOpen && (
         <EditablePlayerCard
           player={getNewPlayer(newPlayerId)}
+          mode="add"
           onCloseModal={closeModal}
-          onConfirm={onPlayerAdd}
         />
       )}
     </div>
